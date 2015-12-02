@@ -36,6 +36,10 @@ module MCollective
         list
       end
 
+      action 'cleanup' do
+        cleanup(request[:handle])
+      end
+
       private
 
       def run_command(request = {})
@@ -81,6 +85,15 @@ module MCollective
         end
 
         reply[:jobs] = list
+      end
+
+      def cleanup(handle)
+        job = Job.new(handle)
+        if [:failed, :stopped].include?(job.status)
+          job.cleanup_state
+        else
+          raise "Job status is #{job.status}"
+        end
       end
     end
   end

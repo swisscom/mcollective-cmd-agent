@@ -138,3 +138,15 @@ action "kill", :description => "Kill a command by handle" do
             :maxlength   => 36,
             :optional    => false
 end
+
+action "cleanup", :description => "Cleanup old handles on systems" do
+    display :always
+
+    input   :handle,
+            :prompt      => "Handle",
+            :description => "Handle of the command",
+            :type        => :string,
+            :validation  => '^[0-9a-z\-]*$',
+            :maxlength   => 36,
+            :optional    => false
+end

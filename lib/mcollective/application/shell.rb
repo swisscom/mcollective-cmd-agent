@@ -11,6 +11,7 @@ mco shell [OPTIONS] [FILTERS] <ACTION> [ARGS]
   mco shell watch [HANDLE]
   mco shell list
   mco shell kill [HANDLE]
+  mco shell cleanup [HANDLE]
 END_OF_USAGE
 
   option :tail,
@@ -23,7 +24,7 @@ END_OF_USAGE
       raise "Please specify an action"
     end
 
-    valid_actions = ['run', 'start', 'watch', 'list', 'kill' ]
+    valid_actions = ['run', 'start', 'watch', 'list', 'kill', 'cleanup']
     action = ARGV.shift
 
     unless valid_actions.include?(action)
@@ -113,6 +114,15 @@ END_OF_USAGE
     client = rpcclient('shell')
 
     client.kill(:handle => handle)
+
+    printrpcstats :summarize => true, :caption => "Command list"
+  end
+
+  def cleanup_command
+    handle = ARGV.shift
+    client = rpcclient('shell')
+
+    client.cleanup(:handle => handle)
 
     printrpcstats :summarize => true, :caption => "Command list"
   end
