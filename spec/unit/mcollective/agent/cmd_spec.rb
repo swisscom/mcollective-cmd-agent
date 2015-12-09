@@ -2,9 +2,9 @@ require 'spec_helper'
 
 module MCollective
   module Agent
-    describe Shell do
-      let(:agent_file) { File.join('lib', 'mcollective', 'agent', 'shell.rb')}
-      let(:agent) { MCollective::Test::LocalAgentTest.new('shell', :agent_file => agent_file).plugin }
+    describe Cmd do
+      let(:agent_file) { File.join('lib', 'mcollective', 'agent', 'cmd.rb')}
+      let(:agent) { MCollective::Test::LocalAgentTest.new('cmd', :agent_file => agent_file).plugin }
 
       describe '#run' do
         it 'should delegate to #run_command' do
@@ -24,7 +24,7 @@ module MCollective
         before :each do
           agent.stubs(:reply).returns(reply)
           @tmpdir = Dir.mktmpdir
-          Shell::Job.stubs(:state_path).returns(@tmpdir)
+          Cmd::Job.stubs(:state_path).returns(@tmpdir)
         end
 
         after :each do

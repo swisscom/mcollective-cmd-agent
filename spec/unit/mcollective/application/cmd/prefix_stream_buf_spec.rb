@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'mcollective/application/shell/prefix_stream_buf'
+require 'mcollective/application/cmd/prefix_stream_buf'
 
 module MCollective
   class Application
-    class Shell < Application
+    class Cmd < Application
       describe PrefixStreamBuf do
         let(:buf) { PrefixStreamBuf.new('test: ') }
 

@@ -1,13 +1,13 @@
 require 'spec_helper'
-require 'mcollective/agent/shell/job'
+require 'mcollective/agent/cmd/job'
 
 module MCollective
   module Agent
-    class Shell
+    class Cmd
       describe Job do
         before :each do
           @tmpdir = Dir.mktmpdir
-          Shell::Job.stubs(:state_path).returns(@tmpdir)
+          Cmd::Job.stubs(:state_path).returns(@tmpdir)
         end
 
         after :each do

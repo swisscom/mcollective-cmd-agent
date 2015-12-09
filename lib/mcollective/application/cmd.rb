@@ -1,17 +1,17 @@
-require 'mcollective/application/shell/watcher'
+require 'mcollective/application/cmd/watcher'
 
-class MCollective::Application::Shell < MCollective::Application
+class MCollective::Application::Cmd < MCollective::Application
   description 'Run shell commands'
 
   usage <<-END_OF_USAGE
-mco shell [OPTIONS] [FILTERS] <ACTION> [ARGS]
+mco cmd [OPTIONS] [FILTERS] <ACTION> [ARGS]
 
-  mco shell run [--tail] [COMMAND]
-  mco shell start [COMMAND]
-  mco shell watch [HANDLE]
-  mco shell list
-  mco shell kill [HANDLE]
-  mco shell cleanup [HANDLE]
+  mco cmd run [--tail] [COMMAND]
+  mco cmd start [COMMAND]
+  mco cmd watch [HANDLE]
+  mco cmd list
+  mco cmd kill [HANDLE]
+  mco cmd cleanup [HANDLE]
 END_OF_USAGE
 
   option :tail,
@@ -52,7 +52,7 @@ END_OF_USAGE
 
   def start_command
     command = ARGV.join(' ')
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     responses = client.start(:command => command)
     responses.sort_by! { |r| r[:sender] }
@@ -68,7 +68,7 @@ END_OF_USAGE
   end
 
   def list_command
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     responses = client.list
     responses.sort_by! { |r| r[:sender] }
@@ -94,7 +94,7 @@ END_OF_USAGE
 
   def watch_command
     handles = ARGV
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     watchers = []
     client.list.each do |response|
@@ -111,7 +111,7 @@ END_OF_USAGE
 
   def kill_command
     handle = ARGV.shift
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     client.kill(:handle => handle)
 
@@ -120,7 +120,7 @@ END_OF_USAGE
 
   def cleanup_command
     handle = ARGV.shift
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     client.cleanup(:handle => handle)
 
@@ -128,7 +128,7 @@ END_OF_USAGE
   end
 
   def do_run(command)
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     responses = client.run(:command => command)
     responses.sort_by! { |r| r[:sender] }
@@ -154,7 +154,7 @@ END_OF_USAGE
   end
 
   def tail(command)
-    client = rpcclient('shell')
+    client = rpcclient('cmd')
 
     processes = []
     client.start(:command => command).each do |response|

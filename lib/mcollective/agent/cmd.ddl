@@ -1,9 +1,9 @@
-metadata    :name        => "shell",
+metadata    :name        => "cmd",
             :description => "Run commands with the local shell",
-            :author      => "Puppet Labs",
+            :author      => "Swisscom",
             :license     => "ASL 2.0",
             :version     => "0.0.2",
-            :url         => "https://github.com/puppetlabs/mcollective-shell-agent",
+            :url         => "https://github.com/swisscom/mcollective-cmd-agent",
             :timeout     => 180
 
 action "run", :description => "Run a command" do

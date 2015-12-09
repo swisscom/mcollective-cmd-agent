@@ -1,8 +1,8 @@
-require 'mcollective/agent/shell/job'
+require 'mcollective/agent/cmd/job'
 
 module MCollective
   module Agent
-    class Shell<RPC::Agent
+    class Cmd<RPC::Agent
       action 'run' do
         run_command(request.data)
       end

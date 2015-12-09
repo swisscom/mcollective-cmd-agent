@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'mcollective/application/shell/watcher'
+require 'mcollective/application/cmd/watcher'
 
 module MCollective
   class Application
-    class Shell < Application
+    class Cmd < Application
       describe Watcher do
         let(:watcher) { Watcher.new('test-node', 'test-handle') }
 

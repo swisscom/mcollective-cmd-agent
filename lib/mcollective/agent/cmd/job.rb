@@ -1,6 +1,6 @@
 require 'securerandom'
 require 'pathname'
-require 'mcollective/agent/shell/job/backports' if RUBY_VERSION < '1.9.0'
+require 'mcollective/agent/cmd/job/backports' if RUBY_VERSION < '1.9.0'
 
 # The Job class manages the spawning and state tracking for a process as it's
 # running.
@@ -22,7 +22,7 @@ require 'mcollective/agent/shell/job/backports' if RUBY_VERSION < '1.9.0'
 
 module MCollective
   module Agent
-    class Shell<RPC::Agent
+    class Cmd<RPC::Agent
       class Job
         @@ruby = nil
 
@@ -152,12 +152,12 @@ module MCollective
 
         def self.state_path
           if Util.windows?
-            default = "C:/ProgramData/mcollective-shell"
+            default = "C:/ProgramData/mcollective-cmd"
           else
-            default = "/var/run/mcollective-shell"
+            default = "/var/run/mcollective-cmd"
           end
 
-          Config.instance.pluginconf['shell.state_path'] || default
+          Config.instance.pluginconf['cmd.state_path'] || default
         end
 
         def get_exitcode

@@ -1,8 +1,11 @@
-# Shell agent
+# Cmd agent
 
 [![Build Status](https://travis-ci.org/puppetlabs/mcollective-shell-agent.svg?branch=master)](https://travis-ci.org/puppetlabs/mcollective-shell-agent)
 
-The shell agent allows you to start and manage shell commands via
+This is a fork of the puppetlabs shell agent with ruby 1.8.7 support and
+additional features.
+
+The cmd agent allows you to start and manage shell commands via
 mcollective.
 
 It allows the running of long-running processes with a mechanism to check in
@@ -38,10 +41,10 @@ the code from lib and adding it to your MCollective $libdir
 The agent should work without any additional configuration, though there are
 some options you can tune the mcollective server.cfg.
 
-### `plugin.shell.state_directory`
+### `plugin.cmd.state_directory`
 
 This is where the state used to track processes will live.  By default this
-will be /var/run/mcollective-shell on Unix systems.
+will be /var/run/mcollective-cmd on Unix systems.
 
 ```
 plugin.shell.state_directory = /opt/run/mcollective-shell
@@ -60,7 +63,7 @@ Runs a command and reports back.  Use this for discrete short-living commands.
 For long-running commands look at `start` or `run --tail`.
 
 ```
-$ mco shell run dir
+$ mco cmd run dir
 
  * [ ============================================================> ] 2 / 2
 
@@ -90,7 +93,7 @@ server2008r2a:
 Finished processing 2 / 2 hosts in 221.28 ms
 ```
 
-### mco shell run --tail
+### mco cmd run --tail
 
 Starts a command, shows you the output from it, kills the command when you
 interrupt with control-c, exits normally when the command exits.
@@ -114,14 +117,14 @@ Sending kill to master 6dad5cb9-57f7-46e0-bad7-07ab117369a5
 ```
 
 
-### mco shell start
+### mco cmd start
 
 Starts a command in the background and tells you the id that has been assigned
-to it.  You can then use `mco shell watch`, `mco shell kill`, `mco shell list`
+to it.  You can then use `mco cmd watch`, `mco shell kill`, `mco shell list`
 to monitor this process and observe its output
 
 ```
-$ mco shell -I /master/ start vmstat 1
+$ mco cmd -I /master/ start vmstat 1
 
  * [ ============================================================> ] 1 / 1
 
@@ -131,12 +134,12 @@ Finished processing 1 / 1 hosts in 76.37 ms
 ```
 
 
-### mco shell watch
+### mco cmd watch
 
-Shows you the output of a command you previously started with `mco shell start`
+Shows you the output of a command you previously started with `mco cmd start`
 
 ```
-$ mco shell watch 0dd67fac-734f-4824-8b4d-03100d4f9d07
+$ mco cmd watch 0dd67fac-734f-4824-8b4d-03100d4f9d07
 
  * [ ============================================================> ] 2 / 2
 
@@ -145,12 +148,12 @@ master stdout:  r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs
 master stdout:  2  0 431448 110704   8484  40644   34   29    52    48   40   47  6  1 93  0  0
 ```
 
-### mco shell list
+### mco cmd list
 
 Show a list of running jobs.
 
 ```
-$ mco shell list -v
+$ mco cmd list -v
 
  * [ ============================================================> ] 2 / 2
 
@@ -163,15 +166,31 @@ master:
 Finished processing 2 / 2 hosts in 142.34 ms
 ```
 
-### mco shell kill
+### mco cmd kill
 
 Kill a running job.
 
 ```
-$ mco shell kill 0dd67fac-734f-4824-8b4d-03100d4f9d07
+$ mco cmd kill 0dd67fac-734f-4824-8b4d-03100d4f9d07
 
  * [ ============================================================> ] 2 / 2
 
 
 Finished processing 2 / 2 hosts in 170.17 ms
 ```
+
+### mco cmd clean
+
+Cleanup an old job
+
+```
+$ mco cmd clean 0dd67fac-734f-4824-8b4d-03100d4f9d07
+
+ * [ ============================================================> ] 2 / 2
+
+
+Finished processing 2 / 2 hosts in 110.23 ms
+```
+
+
+
