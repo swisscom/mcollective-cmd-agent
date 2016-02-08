@@ -1,7 +1,5 @@
 # Cmd agent
 
-[![Build Status](https://travis-ci.org/puppetlabs/mcollective-shell-agent.svg?branch=master)](https://travis-ci.org/puppetlabs/mcollective-shell-agent)
-
 This is a fork of the puppetlabs shell agent with ruby 1.8.7 support and
 additional features.
 
@@ -18,15 +16,12 @@ To use this agent you need at least:
 * MCollective 2.2.4
 * For Ruby 1.8.7 support: 'posix-spawn' and 'uuid' gem
 
-Please report any errors or make feature requests in the [MCOP jira project][MCOP]
-
 Please note: we do not recommend this agent as a way of building out your
 automation, for that you're still better off writing your own tailored
 [agents][writing-agents] that fit your use case.  This agent is targeted
 at the ad-hoc needs that people occasionally have.
 
 [writing-agents]: http://docs.puppetlabs.com/mcollective/simplerpc/agents.html
-[MCOP]: http://tickets.puppetlabs.com/browse/MCOP
 
 ## Installation
 
@@ -47,13 +42,13 @@ This is where the state used to track processes will live.  By default this
 will be /var/run/mcollective-cmd on Unix systems.
 
 ```
-plugin.shell.state_directory = /opt/run/mcollective-shell
+plugin.cmd.state_directory = /opt/run/mcollective-cmd
 ```
 
 
 ## Application usage
 
-The `mco shell` application has several subcommands to start and manage
+The `mco cmd` application has several subcommands to start and manage
 processes.
 
 ### mco shell run
@@ -99,7 +94,7 @@ Starts a command, shows you the output from it, kills the command when you
 interrupt with control-c, exits normally when the command exits.
 
 ```
-$ mco shell -I /master/ run --tail vmstat 1
+$ mco cmd -I /master/ run --tail vmstat 1
 
  * [ ============================================================> ] 1 / 1
 
