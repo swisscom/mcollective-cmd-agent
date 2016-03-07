@@ -38,14 +38,14 @@ module MCollective
         end
 
         it 'should cope with large amounts of output' do
-          agent.send(:run_command, :command => %{ruby -e '8000.times { puts "flirble wirble" }'})
+          agent.send(:run_command, :command => %{for i in {1..8000}; do echo "flirble wirble"; done})
           reply[:success].should == true
           reply[:exitcode].should == 0
           reply[:stdout].should == "flirble wirble\n" * 8000
         end
 
         it 'should cope with large amounts of output on both channels' do
-          agent.send(:run_command, :command => %{ruby -e '8000.times { STDOUT.puts "flirble wirble"; STDERR.puts "flooble booble" }'})
+          agent.send(:run_command, :command => %{for i in {1..8000}; do echo "flirble wirble"; echo "flooble booble" 1>&2; done})
           reply[:success].should == true
           reply[:exitcode].should == 0
           reply[:stdout].should == "flirble wirble\n" * 8000
@@ -61,7 +61,7 @@ module MCollective
         context 'timeout' do
           it 'should not timeout commands that exit quickly enough' do
             agent.send(:run_command, {
-              :command => %{ruby -e 'puts "started"; sleep 1; puts "finished"'},
+              :command => %{echo "started"; sleep 1; echo "finished"},
               :timeout => 2.0,
             })
             reply[:success].should == true
@@ -73,7 +73,7 @@ module MCollective
           it 'should timeout long running commands' do
             start = Time.now()
             agent.send(:run_command, {
-              :command => %{ruby -e 'STDOUT.sync = true; puts "started"; sleep 5; puts "finished"'},
+              :command => %{echo "started"; sleep 5; echo "finished"},
               :timeout => 1.0,
             })
             elapsed = Time.now() - start
