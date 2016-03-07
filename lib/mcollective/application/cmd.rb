@@ -55,7 +55,7 @@ END_OF_USAGE
     client = rpcclient('cmd')
 
     responses = client.start(:command => command)
-    responses.sort_by! { |r| r[:sender] }
+    responses.sort!{|a,b| a[:sender] <=> b[:sender]}
 
     responses.each do |response|
       if response[:statuscode] == 0
@@ -71,7 +71,7 @@ END_OF_USAGE
     client = rpcclient('cmd')
 
     responses = client.list
-    responses.sort_by! { |r| r[:sender] }
+    responses.sort!{|a,b| a[:sender] <=> b[:sender]}
 
     responses.each do |response|
       if response[:statuscode] == 0
@@ -131,7 +131,7 @@ END_OF_USAGE
     client = rpcclient('cmd')
 
     responses = client.run(:command => command)
-    responses.sort_by! { |r| r[:sender] }
+    responses.sort!{|a,b| a[:sender] <=> b[:sender]}
 
     responses.each do |response|
       if response[:statuscode] == 0
