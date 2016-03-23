@@ -1,6 +1,6 @@
 # Change Log
 
-## [unreleased] - unreleased
+## [0.1.0] - 2016-03-23
 
 ### Changed
 - Fork from puppetlabs shell plugin and support for ruby 1.8.7

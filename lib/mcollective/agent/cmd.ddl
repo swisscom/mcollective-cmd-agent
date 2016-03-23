@@ -2,7 +2,7 @@ metadata    :name        => "cmd",
             :description => "Run commands with the local shell",
             :author      => "Swisscom",
             :license     => "ASL 2.0",
-            :version     => "0.0.2",
+            :version     => "0.1.0",
             :url         => "https://github.com/swisscom/mcollective-cmd-agent",
             :timeout     => 180
 
