@@ -2,7 +2,11 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'rake'
+  if RUBY_VERSION.to_f > 1.8
+    gem 'rake'
+  else
+    gem 'rake', '< 11'
+  end
   gem 'rspec', '~> 2.11.0'
   gem 'mocha', '~> 0.10.0'
   gem 'mcollective-test'
