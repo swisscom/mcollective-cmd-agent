@@ -76,7 +76,7 @@ module MCollective
               :command => %{echo "started"; sleep 5; echo "finished"},
               :timeout => 1.0,
             })
-            elapsed = Time.now() - start
+            elapsed = (Time.now() - start).to_i
             elapsed.should <= 2
             reply[:success].should == false
             reply[:exitcode].should == nil
