@@ -225,8 +225,8 @@ module MCollective
               end
 
               ef = "#{state_directory}/exitstatus"
-              File.open("#{ef}.tmp", 'w'){|fh| fh << exitstatus }
-              File.rename("#{ef}.tmp",ef)
+              File.open(ef+'.tmp', 'w'){|fh| fh << exitstatus }
+              File.rename(ef+'.tmp',ef)
             rescue Exception => e
               File.open("#{state_directory}/error", 'w') do |fh|
                 fh.puts e
