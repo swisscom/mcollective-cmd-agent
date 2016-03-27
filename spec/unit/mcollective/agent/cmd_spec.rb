@@ -45,7 +45,7 @@ module MCollective
         end
 
         it 'should cope with large amounts of output on both channels' do
-          agent.send(:run_command, :command => %{for i in $(seq 1  8000); do echo "flirble wirble"; echo "flooble booble" 1>&2; done})
+          agent.send(:run_command, :command => %{for i in $(seq 1 8000); do echo "flirble wirble"; echo "flooble booble" 1>&2; done})
           reply[:success].should == true
           reply[:exitcode].should == 0
           reply[:stdout].should == "flirble wirble\n" * 8000
