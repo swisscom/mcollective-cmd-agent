@@ -3,6 +3,8 @@
 This is a fork of the puppetlabs shell agent with ruby 1.8.7 support and
 additional features.
 
+[![Build Status](https://travis-ci.org/swisscom/mcollective-cmd-agent.png?branch=master)](https://travis-ci.org/swisscom/mcollective-cmd-agent)
+
 The cmd agent allows you to start and manage shell commands via
 mcollective.
 
