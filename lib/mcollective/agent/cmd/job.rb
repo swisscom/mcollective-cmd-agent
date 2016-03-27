@@ -224,10 +224,9 @@ module MCollective
                 exitstatus = $?.to_i
               end
 
-              File.open("#{state_directory}/exitstatus", 'w') do |fh|
-                fh.puts exitstatus
-              end
-
+              ef = "#{state_directory}/exitstatus"
+              File.open("#{ef}.tmp", 'w'){|fh| fh << exitstatus }
+              File.rename("#{ef}.tmp",ef)
             rescue Exception => e
               File.open("#{state_directory}/error", 'w') do |fh|
                 fh.puts e
